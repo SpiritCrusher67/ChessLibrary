@@ -11,9 +11,24 @@ namespace ChessLibrary.Main_units
     {
         public DefaultBoard(ITakeingBehavior takeingBehavior, FiguresFactory figuresFactory) : base(takeingBehavior, figuresFactory) { }
 
-        public override IEnumerable<Field> GetAvaliableFields(Field field)
+        public override IEnumerable<Field>? GetAvaliableFields(Field field)
         {
-            throw new NotImplementedException();
+            var figure = field.Figure;
+            if (figure?.Side != CurrentTurnSide.CurrentSide) return null;
+
+            return CurrentTurnSide.GetAllAvaliableFields(_fields)[field.Figure!];
+        }
+
+        public override Side CurrentTurnSide
+        {
+            get => currentTurnSide;
+            set
+            {
+                if (currentTurnSide != null)
+                    currentTurnSide.IsMyTurn = false;
+                currentTurnSide = value;
+                currentTurnSide.IsMyTurn = true;
+            }
         }
 
         protected override void InitializeBoard(ITakeingBehavior takeingBehavior, FiguresFactory figuresFactory)
