@@ -16,7 +16,7 @@ namespace ChessLibrary.Main_units
         public Figure? Figure { get; set; }
         public bool IsEmpty => Figure == null;
 
-
+        public SideEnum? FigureSide => Figure?.Side;
 
         public int X { get; private set; }
         public int Y { get; private set; }
