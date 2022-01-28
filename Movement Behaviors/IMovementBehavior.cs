@@ -9,7 +9,13 @@ namespace ChessLibrary.Movement_Behaviors
     public interface IMovementBehavior
     {
         public IEnumerable<Field> GetAvaliableMoves(Field[,] fields, (int y, int x) currentPosition, SideEnum currentSide);
-        public void MakeAMove(Field from, Field to, ITakeingBehavior takeingBehavior, Field[,] fields);
+        public void MakeAMove(Field from, Field to, ITakeingBehavior takeingBehavior, Field[,] fields)
+        {
+            if (!to.IsEmpty)
+                takeingBehavior.TakeFigureFromField(to);
+            to.Figure = from.Figure;
+            from.Figure = null;
+        }
         /// <summary>
         /// Represents can move on one field at the time
         /// </summary>
