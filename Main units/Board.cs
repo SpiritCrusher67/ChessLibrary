@@ -30,8 +30,8 @@ namespace ChessLibrary.Main_units
 			InitializeBoard(takeingBehavior, factory);
 		}
 
-		public Side WhiteSide { get; private set; }
-		public Side BlackSide { get; private set; }
+		public Side WhiteSide { get; protected set; }
+		public Side BlackSide { get; protected set; }
 		public virtual Side CurrentTurnSide
 		{
 			get => currentTurnSide;
@@ -47,7 +47,7 @@ namespace ChessLibrary.Main_units
 		public IEnumerable<Figure> TakedFigures => takeingBehavior.GetTakedFigures;
 		public abstract IEnumerable<Field> GetAvaliableFields(Field field);
 		public IEnumerable<Field> GetAvaliableFields((int y, int x) coords) => GetAvaliableFields(_fields[coords.y, coords.x]);
-		public abstract void InitializeBoard(ITakeingBehavior takeingBehavior, FiguresFactory figuresFactory);
+		protected abstract void InitializeBoard(ITakeingBehavior takeingBehavior, FiguresFactory figuresFactory);
 		public abstract bool MakeMove(Field from, Field to);
 		public bool MakeMove((int y, int x) from, (int y, int x) to) => MakeMove(_fields[from.y, from.x], _fields[to.y, to.x]);
 
