@@ -24,6 +24,15 @@ namespace ChessLibrary.Main_units
 		/// Invokes after move where side wins.
 		/// </summary>
 		public event Action<Side> CheckMateHasSetedEvent;
+		/// <summary>
+		/// Invokes after takeing figure.
+		/// </summary>
+		public event Action<Figure> FigureHasTakedEvent
+        {
+			add { takeingBehavior.FigureHasTakedEvent += value; }
+            remove { takeingBehavior.FigureHasTakedEvent -= value; }
+		}
+
 
 		public Board(ITakeingBehavior takeingBehavior, FiguresFactory factory)
 		{
