@@ -39,7 +39,7 @@ namespace ChessLibrary.Main_units
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    _fields[i, j] = new Field(j, i);
+                    _fields[i, j] = new Field(i, j);
                 }
             }
             #endregion

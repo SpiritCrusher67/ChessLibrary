@@ -27,6 +27,7 @@ namespace ChessLibrary.Main_units
 
 		public Board(ITakeingBehavior takeingBehavior, FiguresFactory factory)
 		{
+			this.takeingBehavior = takeingBehavior;
 			InitializeBoard(takeingBehavior, factory);
 		}
 

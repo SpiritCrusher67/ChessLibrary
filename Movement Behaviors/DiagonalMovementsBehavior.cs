@@ -23,10 +23,10 @@ namespace ChessLibrary.Movement_Behaviors
         {
             List<Func<int, int, bool>> exps = new List<Func<int, int, bool>>()
             {
-                (x,y) => x + y == currentPosition.x + currentPosition.y && y > currentPosition.y,
-                (x,y) => x + y == currentPosition.x + currentPosition.y && y < currentPosition.y,
-                (x,y) => x - y == currentPosition.x - currentPosition.y && y > currentPosition.y,
-                (x,y) => x - y == currentPosition.x - currentPosition.y && y < currentPosition.y
+                (y,x) => x + y == currentPosition.x + currentPosition.y && y > currentPosition.y,
+                (y,x) => x + y == currentPosition.x + currentPosition.y && y < currentPosition.y,
+                (y,x) => x - y == currentPosition.x - currentPosition.y && y > currentPosition.y,
+                (y,x) => x - y == currentPosition.x - currentPosition.y && y < currentPosition.y
             };
 
             var result = new List<Field>();
@@ -49,9 +49,11 @@ namespace ChessLibrary.Movement_Behaviors
             void HorizontalCycle(int y)
             {
                 for (int x = 0; x < _boardDimension; x++)
+                {
+                    if (x == currentPosition.x) continue;
                     for (int e = 0; e < exps.Count(); e++)
                     {
-                        if (exps.ElementAt(e).Invoke(x, y))
+                        if (exps.ElementAt(e).Invoke(y, x))
                         {
                             if (!fields[y, x].IsEmpty)
                             {
@@ -63,6 +65,8 @@ namespace ChessLibrary.Movement_Behaviors
                             break;
                         }
                     }
+                }
+
             }
             return result;
         }
