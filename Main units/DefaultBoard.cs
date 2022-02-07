@@ -93,6 +93,20 @@ namespace ChessLibrary.Main_units
             MoveHasMakedEvent += (Field from, Field to) => CurrentTurnSide = (CurrentTurnSide == WhiteSide) ? BlackSide : WhiteSide;
 
             MoveHasMakedEvent += (Field from, Field to) =>
+            { 
+                foreach (var figure in WhiteSide.Figures.Where(f => f.State == FigureStateEnum.MOVED))
+                    figure.State = FigureStateEnum.NONE;
+                foreach (var figure in BlackSide.Figures.Where(f => f.State == FigureStateEnum.MOVED))
+                    figure.State = FigureStateEnum.NONE;
+            };
+
+            MoveHasMakedEvent += (Field from, Field to) =>
+            {
+                if (to.Figure?.Name == "Pawn" && to.Figure?.State == FigureStateEnum.DONTMOVED)
+                    to.Figure!.State = FigureStateEnum.MOVED;
+            };
+
+            MoveHasMakedEvent += (Field from, Field to) =>
             {
                 if (CurrentTurnSide == WhiteSide)
                 {
