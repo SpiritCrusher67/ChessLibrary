@@ -31,95 +31,106 @@ namespace ChessLibrary.Main_units
             }
         }
 
-        protected override void InitializeBoard(ITakeingBehavior takeingBehavior, FiguresFactory figuresFactory)
+
+        public override bool MakeMove(Field from, Field to)
         {
-            #region Field list initialization
-            _fields = new Field[8, 8];
-            for (int i = 0; i < 8; i++)
+            if (from.IsEmpty || from.Figure!.Side != currentTurnSide.CurrentSide) return false;
+
+            var avaliableFields = CurrentTurnSide.GetAllAvaliableFields(_fields)[from.Figure];
+
+            if (avaliableFields.Contains(to))
             {
-                for (int j = 0; j < 8; j++)
+                from.Figure.MakeAMove(from, to, takeingBehavior, _fields);
+                OnMoveHasMaked(from, to);
+                return true;
+            }
+            return false;
+        }
+
+        protected override void InitializeFieldsArray()
+        {
+            _fields = new Field[8, 8];
+            for (int y = 0; y < 8; y++)
+            {
+                for (int x = 0; x < 8; x++)
                 {
-                    _fields[i, j] = new Field(i, j);
+                    _fields[y, x] = new Field(y, x);
                 }
             }
-            #endregion
+        }
 
-            var whiteFigures = new List<Figure>();
-            var blackFigures = new List<Figure>();
+        protected override IList<Figure> WhiteFiguresPlacement(FiguresFactory factory)
+        {
+            factory.SetFactorySide(SideEnum.White);
+            factory.SetPawnMovementDirection(DirectionOfMovementEnum.UP);
+            return PlaceFiguresAtSide(factory, 0, 1);
+        }
+        protected override IList<Figure> BlackFiguresPlacement(FiguresFactory factory)
+        {
+            factory.SetFactorySide(SideEnum.Black);
+            factory.SetPawnMovementDirection(DirectionOfMovementEnum.DOWN);
+            return PlaceFiguresAtSide(factory, 7, 6);
+        }
 
-            figuresFactory.SetFactorySide(SideEnum.White);
-            figuresFactory.SetPawnMovementDirection(DirectionOfMovementEnum.UP);
-            var whiteKing = figuresFactory.CreateKing();
+        protected override void SidesInitialization(IList<Figure> whiteFigures, IList<Figure> blackFigures)
+        {
+            var whiteKing = whiteFigures.First(f => f.Name == "King");
+            var blackKing = blackFigures.First(f => f.Name == "King");
 
-            #region White figures placement
-            SetSingleFigure(0, 0, figuresFactory.CreateRook(), whiteFigures);
-            SetSingleFigure(0, 7, figuresFactory.CreateRook(), whiteFigures);
+            WhiteSide = new Side(SideEnum.White, whiteFigures, whiteKing);
+            WhiteSide.IsMyTurn = true;
+            BlackSide = new Side(SideEnum.Black, blackFigures, blackKing);
+            BlackSide.IsMyTurn = false;
 
-            SetSingleFigure(0, 1, figuresFactory.CreateKnight(), whiteFigures);
-            SetSingleFigure(0, 6, figuresFactory.CreateKnight(), whiteFigures);
+            WhiteSide.SetEnemySide(BlackSide);
+            BlackSide.SetEnemySide(WhiteSide);
 
-            SetSingleFigure(0, 2, figuresFactory.CreateBishop(), whiteFigures);
-            SetSingleFigure(0, 5, figuresFactory.CreateBishop(), whiteFigures);
+            CurrentTurnSide = WhiteSide;
+        }
 
-            SetSingleFigure(0, 3, whiteKing, whiteFigures);
-            SetSingleFigure(0, 4, figuresFactory.CreateQueen(), whiteFigures);
-
-            SetLineOfFigures(1, figuresFactory, whiteFigures);
-            #endregion
-
-            figuresFactory.SetFactorySide(SideEnum.Black);
-            figuresFactory.SetPawnMovementDirection(DirectionOfMovementEnum.DOWN);
-            var blackKing = figuresFactory.CreateKing();
-
-            #region Black figures placement
-            SetSingleFigure(7, 0, figuresFactory.CreateRook(), blackFigures);
-            SetSingleFigure(7, 7, figuresFactory.CreateRook(), blackFigures);
-
-            SetSingleFigure(7, 1, figuresFactory.CreateKnight(), blackFigures);
-            SetSingleFigure(7, 6, figuresFactory.CreateKnight(), blackFigures);
-
-            SetSingleFigure(7, 2, figuresFactory.CreateBishop(), blackFigures);
-            SetSingleFigure(7, 5, figuresFactory.CreateBishop(), blackFigures);
-
-            SetSingleFigure(7, 3, blackKing, blackFigures);
-            SetSingleFigure(7, 4, figuresFactory.CreateQueen(), blackFigures);
-
-            SetLineOfFigures(6, figuresFactory, blackFigures);
-            #endregion
-
-            #region Initialization MoveHasMakedEvent listeners
+        protected override void EventsInitialization()
+        {
             MoveHasMakedEvent += (Field from, Field to) => CurrentTurnSide = (CurrentTurnSide == WhiteSide) ? BlackSide : WhiteSide;
+
             MoveHasMakedEvent += (Field from, Field to) =>
             {
                 if (CurrentTurnSide == WhiteSide)
+                {
                     if (BlackSide.GetAllAvaliableFields(_fields).SelectMany(pair => pair.Value.Select(f => f.Figure)).ToList().Contains(WhiteSide.King))
                         OnCheckHasSeted(BlackSide, WhiteSide);
-                    else
-                if (WhiteSide.GetAllAvaliableFields(_fields).SelectMany(pair => pair.Value.Select(f => f.Figure)).ToList().Contains(BlackSide.King))
-                        OnCheckHasSeted(WhiteSide, BlackSide);
+                }
+                else if (WhiteSide.GetAllAvaliableFields(_fields).SelectMany(pair => pair.Value.Select(f => f.Figure)).ToList().Contains(BlackSide.King))
+                    OnCheckHasSeted(WhiteSide, BlackSide);
             };
+
             MoveHasMakedEvent += (Field from, Field to) =>
             {
                 if (CurrentTurnSide.GetAllAvaliableFields(_fields).All(pair => pair.Value.Count == 0))
                     OnCheckMateHasSeted(CurrentTurnSide);
             };
-            #endregion
 
-            #region Initialization FigureHasTakedEvent listeners
             takeingBehavior.FigureHasTakedEvent += (f) => { if (f.Side == SideEnum.White) WhiteSide.RemoveFigure(f); else BlackSide.RemoveFigure(f); };
-            #endregion
+        }
 
-            #region Sides initialization
-            WhiteSide = new Side(SideEnum.White, whiteFigures, whiteKing);
-            WhiteSide.IsMyTurn = true;
-            BlackSide = new Side(SideEnum.Black, blackFigures, blackKing);
-            BlackSide.IsMyTurn = false;
-            CurrentTurnSide = WhiteSide;
+        private IList<Figure> PlaceFiguresAtSide(FiguresFactory figuresFactory, int figuresY, int pawnsY)
+        {
+            var placedFigures = new List<Figure>();
 
-            WhiteSide.SetEnemySide(BlackSide);
-            BlackSide.SetEnemySide(WhiteSide);
-            #endregion
+            SetSingleFigure(figuresY, 0, figuresFactory.CreateRook(), placedFigures);
+            SetSingleFigure(figuresY, 7, figuresFactory.CreateRook(), placedFigures);
 
+            SetSingleFigure(figuresY, 1, figuresFactory.CreateKnight(), placedFigures);
+            SetSingleFigure(figuresY, 6, figuresFactory.CreateKnight(), placedFigures);
+
+            SetSingleFigure(figuresY, 2, figuresFactory.CreateBishop(), placedFigures);
+            SetSingleFigure(figuresY, 5, figuresFactory.CreateBishop(), placedFigures);
+
+            SetSingleFigure(figuresY, 3, figuresFactory.CreateKing(), placedFigures);
+            SetSingleFigure(figuresY, 4, figuresFactory.CreateQueen(), placedFigures);
+
+            SetLineOfFigures(pawnsY, figuresFactory, placedFigures);
+
+            return placedFigures;
 
             #region Utility methods
             void SetSingleFigure(int y, int x, Figure figure, List<Figure> figuresList)
@@ -138,21 +149,6 @@ namespace ChessLibrary.Main_units
                 }
             }
             #endregion
-        }
-
-        public override bool MakeMove(Field from, Field to)
-        {
-            if (from.IsEmpty || from.Figure!.Side != currentTurnSide.CurrentSide) return false;
-
-            var avaliableFields = CurrentTurnSide.GetAllAvaliableFields(_fields)[from.Figure];
-
-            if (avaliableFields.Contains(to))
-            {
-                from.Figure.MakeAMove(from, to, takeingBehavior, _fields);
-                OnMoveHasMaked(from, to);
-                return true;
-            }
-            return false;
         }
     }
 }
