@@ -24,7 +24,7 @@ namespace ChessLibrary.Main_units
 
         public void SetName(string name) => Name = name;
 
-        public IEnumerable<Field> GetAvaliableFields(Field[,] fields, Field currentField) => (currentField == null) ? new List<Field>() :
+        public IEnumerable<Field> GetAvaliableFields(Field[,] fields, Field? currentField) => (currentField == null) ? new List<Field>() :
             _movementBehavior.GetAvaliableMoves(fields, new(currentField.Y, currentField.X), Side);
 
         public void MakeAMove(Field from, Field to, ITakeingBehavior takeingBehavior, Field[,] fields) => _movementBehavior.MakeAMove(from, to, takeingBehavior, fields);

@@ -27,6 +27,7 @@ namespace ChessLibrary.Main_units
 
 		public Board(ITakeingBehavior takeingBehavior, FiguresFactory factory)
 		{
+			this.takeingBehavior = takeingBehavior;
 			InitializeBoard(takeingBehavior, factory);
 		}
 
@@ -47,12 +48,26 @@ namespace ChessLibrary.Main_units
 		public IEnumerable<Figure> TakedFigures => takeingBehavior.GetTakedFigures;
 		public abstract IEnumerable<Field> GetAvaliableFields(Field field);
 		public IEnumerable<Field> GetAvaliableFields((int y, int x) coords) => GetAvaliableFields(_fields[coords.y, coords.x]);
-		protected abstract void InitializeBoard(ITakeingBehavior takeingBehavior, FiguresFactory figuresFactory);
+
 		public abstract bool MakeMove(Field from, Field to);
 		public bool MakeMove((int y, int x) from, (int y, int x) to) => MakeMove(_fields[from.y, from.x], _fields[to.y, to.x]);
 
 		protected void OnMoveHasMaked(Field from, Field to) => MoveHasMakedEvent?.Invoke(from, to);
 		protected void OnCheckHasSeted(Side from, Side to) => CheckHasSetedEvent?.Invoke(from, to);
 		protected void OnCheckMateHasSeted(Side winnerSide) => CheckMateHasSetedEvent?.Invoke(winnerSide);
+
+		protected void InitializeBoard(ITakeingBehavior takeingBehavior, FiguresFactory figuresFactory)
+		{
+			InitializeFieldsArray();
+			SidesInitialization(WhiteFiguresPlacement(figuresFactory), BlackFiguresPlacement(figuresFactory));
+			EventsInitialization();
+		}
+
+		protected abstract void InitializeFieldsArray();
+		protected abstract IList<Figure> WhiteFiguresPlacement(FiguresFactory factory);
+		protected abstract IList<Figure> BlackFiguresPlacement(FiguresFactory factory);
+		protected abstract void SidesInitialization(IList<Figure> whiteFigures, IList<Figure> blackFigures);
+		protected abstract void EventsInitialization();
+
 	}
 }

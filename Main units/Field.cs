@@ -23,11 +23,11 @@ namespace ChessLibrary.Main_units
 
         public override string ToString() => $"Field at y = {Y}, x = {X}, contains: {Figure?.ToString() ?? "nothing"}";
 
-        public static Field FindFieldByFigure(Field[,] fields, Figure figure)
+        public static Field? FindFieldByFigure(Field[,] fields, Figure figure)
         {
             foreach (var field in fields)
                 if (field.Figure == figure) return field;
-            throw new Exception("");
+            return null;
         }
     }
 }
