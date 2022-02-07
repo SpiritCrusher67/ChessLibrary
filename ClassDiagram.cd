@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Alphabetical" MembersFormat="FullSignature">
+  <Class Name="ChessLibrary.Factories.DefaultFiguresFactory" Collapsed="true">
+    <Position X="7.25" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAEAAAAAAAAAAECAAgAAAAAAQ=</HashCode>
+      <FileName>Factories\DefaultFiguresFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChessLibrary.Factories.FiguresFactory">
+    <Position X="4.75" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAACAAAAAAAAAAEAAAAAAIAAAECAAiAACAAAQ=</HashCode>
+      <FileName>Factories\FiguresFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChessLibrary.Main_units.Board">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAoAAAAgBCBBiEAAABBQQAAgQACAAAQEAAoAg=</HashCode>
+      <FileName>Main units\Board.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChessLibrary.Main_units.DefaultBoard" Collapsed="true">
+    <Position X="3" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAABAAAAAABQQAAgAACAAAAAAAAAg=</HashCode>
+      <FileName>Main units\DefaultBoard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChessLibrary.Main_units.Field">
+    <Position X="4.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAEAAAAAAAAAAAAEAgAAAAQAAAAYAA=</HashCode>
+      <FileName>Main units\Field.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChessLibrary.Main_units.Figure">
+    <Position X="6.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAACgAQAAAAAAAAACAAARAAAAAA=</HashCode>
+      <FileName>Main units\Figure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChessLibrary.Main_units.Side">
+    <Position X="2.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAACAABAAhAAAAAAAAAAAAWCAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Main units\Side.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChessLibrary.Movement_Behaviors.CombinedMovingBehavior" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAgABAAAAAAAAAQAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Movement Behaviors\CombinedMovingBehavior.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ChessLibrary.Movement_Behaviors.DiagonalMovementsBehavior" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAABAAAAAAAAAQAQQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Movement Behaviors\DiagonalMovementsBehavior.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ChessLibrary.Movement_Behaviors.HorizontalAndVerticalMovementsBehavior" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="4.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAABAAAAAAAAAQAQQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Movement Behaviors\HorizontalAndVerticalMovementsBehavior.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ChessLibrary.Movement_Behaviors.KnightMovementsBehavior" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="2.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAABAAAAAAAAAQAQQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Movement Behaviors\KnightMovementsBehavior.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.19" />
+  </Class>
+  <Class Name="ChessLibrary.Movement_Behaviors.PawnMovementsBehavior" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="1.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQgAABAAAAAAAAAQAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Movement Behaviors\PawnMovementsBehavior.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.19" />
+  </Class>
+  <Class Name="ChessLibrary.Takeing_Behaviors.DefaultTakeingBehavior" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgABAgAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Takeing Behaviors\DefaultTakeingBehavior.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="ChessLibrary.Movement_Behaviors.IMovementBehavior">
+    <Position X="9.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIgAAAAQAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Movement Behaviors\IMovementBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ChessLibrary.Takeing_Behaviors.ITakeingBehavior">
+    <Position X="9.5" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAgAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Takeing Behaviors\ITakeingBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="ChessLibrary.Main_units.SideEnum">
+    <Position X="17.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Main units\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChessLibrary.Main_units.FigureStateEnum">
+    <Position X="17.25" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAASAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Main units\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChessLibrary.Main_units.DirectionOfMovementEnum">
+    <Position X="17.25" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAICAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Main units\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
