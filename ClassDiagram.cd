@@ -1,56 +1,92 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Alphabetical" MembersFormat="FullSignature">
   <Class Name="ChessLibrary.Factories.DefaultFiguresFactory" Collapsed="true">
-    <Position X="7.25" Y="0.75" Width="2" />
+    <Position X="18.5" Y="5.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAAAEAAAAAAAAAAECAAgAAAAAAQ=</HashCode>
       <FileName>Factories\DefaultFiguresFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLibrary.Factories.FiguresFactory">
-    <Position X="4.75" Y="0.75" Width="2" />
+    <Position X="15.25" Y="4.5" Width="2" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAACAAAAAAAAAAEAAAAAAIAAAECAAiAACAAAQ=</HashCode>
       <FileName>Factories\FiguresFactory.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pawnDirection" />
+      <Field Name="factorySide" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="ChessLibrary.Main_units.Board">
-    <Position X="0.5" Y="0.5" Width="2" />
+    <Position X="4.25" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAoAAAAgBCBBiEAAABBQQAAgQACAAAQEAAoAg=</HashCode>
       <FileName>Main units\Board.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_fields" />
+      <Field Name="takeingBehavior" />
+      <Property Name="BlackSide" />
+      <Property Name="WhiteSide" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="ChessLibrary.Main_units.DefaultBoard" Collapsed="true">
-    <Position X="3" Y="0.75" Width="1.5" />
+    <Position X="0.75" Y="4.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAgAAAAAABAAAAAABQQAAgAACAAAAAAAAAg=</HashCode>
       <FileName>Main units\DefaultBoard.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ChessLibrary.Main_units.Field">
-    <Position X="4.5" Y="3.75" Width="1.5" />
+    <Position X="7.5" Y="3.25" Width="1.5" />
+    <AssociationLine Name="Figure" Type="ChessLibrary.Main_units.Figure" ManuallyRouted="true">
+      <Path>
+        <Point X="9" Y="4.282" />
+        <Point X="9.44" Y="4.282" />
+        <Point X="9.44" Y="3.969" />
+        <Point X="13.25" Y="3.969" />
+        <Point X="13.25" Y="2.373" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAAEAAAAAAAAAAAAEAgAAAAQAAAAYAA=</HashCode>
       <FileName>Main units\Field.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Figure" />
+      <Property Name="FigureSide" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="ChessLibrary.Main_units.Figure">
-    <Position X="6.25" Y="3.75" Width="1.5" />
+    <Position X="12.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAACgAQAAAAAAAAACAAARAAAAAA=</HashCode>
       <FileName>Main units\Figure.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_movementBehavior" />
+      <Property Name="Side" />
+      <Property Name="State" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="ChessLibrary.Main_units.Side">
-    <Position X="2.75" Y="3.75" Width="1.5" />
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <AssociationLine Name="Figures" Type="ChessLibrary.Main_units.Figure">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.344" Y="0.11" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>IAAAACAABAAhAAAAAAAAAAAAWCAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Main units\Side.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Figures" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="ChessLibrary.Movement_Behaviors.CombinedMovingBehavior" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="11.75" Y="0.5" Width="2.5" />
+    <Position X="18.5" Y="0.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAAAAgABAAAAAAAAAQAAAAAAAAEAAAAAAAA=</HashCode>
       <FileName>Movement Behaviors\CombinedMovingBehavior.cs</FileName>
@@ -58,7 +94,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ChessLibrary.Movement_Behaviors.DiagonalMovementsBehavior" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="11.75" Y="3.5" Width="2.5" />
+    <Position X="18.5" Y="3.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAQAAABAAAAAAAAAQAQQAAAAAAAAAAAAAA=</HashCode>
       <FileName>Movement Behaviors\DiagonalMovementsBehavior.cs</FileName>
@@ -66,7 +102,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ChessLibrary.Movement_Behaviors.HorizontalAndVerticalMovementsBehavior" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="11.75" Y="4.5" Width="2.5" />
+    <Position X="18.5" Y="4.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAQAAABAAAAAAAAAQAQQAAAAAAAAAAAAAA=</HashCode>
       <FileName>Movement Behaviors\HorizontalAndVerticalMovementsBehavior.cs</FileName>
@@ -74,7 +110,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ChessLibrary.Movement_Behaviors.KnightMovementsBehavior" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="11.75" Y="2.5" Width="2.5" />
+    <Position X="18.5" Y="2.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAQAAABAAAAAAAAAQAQQAAAAAAAAAAAAAA=</HashCode>
       <FileName>Movement Behaviors\KnightMovementsBehavior.cs</FileName>
@@ -82,7 +118,7 @@
     <Lollipop Position="0.19" />
   </Class>
   <Class Name="ChessLibrary.Movement_Behaviors.PawnMovementsBehavior" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="11.75" Y="1.5" Width="2.5" />
+    <Position X="18.5" Y="1.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAQgAABAAAAAAAAAQAQAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Movement Behaviors\PawnMovementsBehavior.cs</FileName>
@@ -90,7 +126,7 @@
     <Lollipop Position="0.19" />
   </Class>
   <Class Name="ChessLibrary.Takeing_Behaviors.DefaultTakeingBehavior" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="14.5" Y="0.5" Width="2.25" />
+    <Position X="0.75" Y="3" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAgABAgAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>Takeing Behaviors\DefaultTakeingBehavior.cs</FileName>
@@ -98,35 +134,35 @@
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="ChessLibrary.Movement_Behaviors.IMovementBehavior">
-    <Position X="9.5" Y="0.5" Width="2" />
+    <Position X="15.75" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAIgAAAAQAQAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Movement Behaviors\IMovementBehavior.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="ChessLibrary.Takeing_Behaviors.ITakeingBehavior">
-    <Position X="9.5" Y="2.5" Width="2" />
+    <Position X="0.75" Y="1" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAgAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>Takeing Behaviors\ITakeingBehavior.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="ChessLibrary.Main_units.SideEnum">
-    <Position X="17.25" Y="0.5" Width="2.25" />
+    <Position X="11.75" Y="4.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Main units\Enums.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="ChessLibrary.Main_units.FigureStateEnum">
-    <Position X="17.25" Y="1.75" Width="2.25" />
+    <Position X="9.25" Y="2" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAAAAAAAAAASAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Main units\Enums.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="ChessLibrary.Main_units.DirectionOfMovementEnum">
-    <Position X="17.25" Y="3.25" Width="2.25" />
+    <Position X="11.75" Y="5.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAICAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Main units\Enums.cs</FileName>
